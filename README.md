@@ -4,6 +4,8 @@ App Android con Kotlin y Jetpack Compose para manejar solicitudes.
 
 También tiene una demo de API REST (Guía 14) y tests (Guía 15).
 
+La documentación técnica está en [DOCUMENTACION.md](DOCUMENTACION.md).
+
 ---
 
 ## Cuentas de prueba
@@ -46,8 +48,8 @@ Empieza en el **login**.
 
 ## Guía 14 — Posts en Firebase
 
-El GET lee la colección `posts` de tu Firestore (proyecto Gestion Solicitudes DEMO).
-Las solicitudes siguen en Room. Los posts no son solicitudes.
+El GET lee las colecciones `servicios` y `posts` de tu Firestore (proyecto Gestion Solicitudes DEMO).
+Las solicitudes siguen en Room. Los posts no son solicitudes. Si borras todos los servicios, **GET todos** vuelve a crear el catálogo.
 
 Cómo entrar:
 1. Login como admin  
@@ -97,8 +99,11 @@ ui/screen/      → pantallas de la app (incluida la demo de API)
 # tests unitarios
 ./gradlew :app:testDebugUnitTest
 
-# compilar
+# compilar debug
 ./gradlew :app:assembleDebug
+
+# APK firmado de release
+./gradlew :app:assembleRelease
 
 # limpiar build
 ./gradlew clean

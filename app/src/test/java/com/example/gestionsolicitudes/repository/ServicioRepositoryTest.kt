@@ -6,6 +6,7 @@ import com.example.gestionsolicitudes.data.remote.FirestoreValor
 import com.example.gestionsolicitudes.model.ServicioCatalogo
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldContainExactly
+import io.kotest.matchers.shouldBe
 
 class ServicioRepositoryTest : StringSpec({
     "aCatalogo convierte la respuesta REST de Firestore" {
@@ -28,6 +29,12 @@ class ServicioRepositoryTest : StringSpec({
                     )
                 )
             )
+        )
+
+        ServicioRepository.SEMILLA.map { it.servicio } shouldBe listOf(
+            "Mantenimiento web",
+            "Soporte de correo",
+            "Hosting"
         )
 
         ServicioRepository.aCatalogo(respuesta) shouldContainExactly listOf(
