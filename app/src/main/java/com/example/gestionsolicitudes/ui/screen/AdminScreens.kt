@@ -95,13 +95,13 @@ fun InicioAdminScreen(
             navController.navigate("escanear_qr")
         }
         BotonAncho(
-            "API demo · Posts (GET/POST/PUT/DELETE)",
+            "Posts en Firebase (GET/POST/PUT/DELETE)",
             secundario = true,
             icono = Icons.Outlined.Cloud
         ) { navController.navigate("posts") }
 
         Text(
-            "Datos de prueba desde internet (JSONPlaceholder). No son solicitudes reales.",
+            "Los posts se leen de tu Firebase. Las solicitudes siguen en Room.",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )

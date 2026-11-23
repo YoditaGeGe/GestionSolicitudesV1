@@ -37,25 +37,25 @@ Empieza en el **login**.
 - Ver todas
 - Filtrar / asignar / cambiar estado
 - Escanear QR
-- Abrir la demo de API (botón coral: `API demo · Posts`)
+- Abrir los posts de Firebase (botón coral: `Posts en Firebase`)
 
 **Técnico**
 - Escanear QR
 
 ---
 
-## Guía 14 — API de prueba
+## Guía 14 — Posts en Firebase
 
-Usa datos falsos de internet: [JSONPlaceholder](https://jsonplaceholder.typicode.com/)  
-(No son solicitudes reales, son posts de ejemplo.)
+El GET lee la colección `posts` de tu Firestore (proyecto Gestion Solicitudes DEMO).
+Las solicitudes siguen en Room. Los posts no son solicitudes.
 
 Cómo entrar:
 1. Login como admin  
-2. Toca **API demo · Posts (GET/POST/PUT/DELETE)**  
+2. Toca **Posts en Firebase (GET/POST/PUT/DELETE)**  
 
 Botones:
-- **GET** → carga la lista  
-- **POST** → crea uno  
+- **GET** → lee la lista desde Firestore  
+- **POST** → guarda uno  
 - **PUT** → edita  
 - **DELETE** → borra  
 
@@ -81,9 +81,10 @@ Tests:
 ## Carpetas importantes
 
 ```
-data/local      → Room (solicitudes)
-data/remote     → Retrofit (API)
-repository/     → PostRepository
+data/local      → Room (solicitudes, usuarios, historial)
+data/remote     → Retrofit (catálogo de servicios en tu Firestore)
+repository/     → PostRepository y ServicioRepository
+app/google-services.json → tu proyecto de Firebase
 viewmodel/      → lógica
 ui/screen/      → pantallas de la app (incluida la demo de API)
 ```
@@ -107,6 +108,6 @@ ui/screen/      → pantallas de la app (incluida la demo de API)
 
 ## Stack rápido
 
-Compose · Room · Retrofit · QR (CameraX + ML Kit) · Kotest · MockK
+Compose · MVVM · Room · Retrofit · Firebase Firestore · QR (CameraX + ML Kit) · Kotest · MockK
 
 Repo: https://github.com/YoditaGeGe/GestionSolicitudes

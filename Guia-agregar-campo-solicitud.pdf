@@ -1,0 +1,180 @@
+%PDF-1.4
+1 0 obj<< /Type /Catalog /Pages 2 0 R >>endobj
+2 0 obj<< /Type /Pages /Count 3 /Kids [7 0 R 9 0 R 11 0 R] >>endobj
+3 0 obj<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>endobj
+4 0 obj<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>endobj
+5 0 obj<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>endobj
+6 0 obj<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>endobj
+7 0 obj<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 8 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> >>endobj
+8 0 obj<< /Length 3644 >>stream
+BT /F2 16 Tf 0 0.15 0.35 rg 48 800 Td (Paso a paso: agregar un campo al formulario de) Tj ET
+BT /F2 16 Tf 0 0.15 0.35 rg 48 780 Td (nueva solicitud) Tj ET
+BT /F3 11 Tf 0.35 0.35 0.35 rg 48 754 Td (Ejemplo imaginario: el campo Tel\351fono. Esta gu\355a no modifica la app.) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 734 Td (El formulario de Nueva solicitud no vive en un solo archivo. Un campo, como T\355tulo,) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 719 Td (pasa por cuatro paradas. Para agregar otro campo se repiten esas mismas paradas.) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 692 Td (C\363mo se ver\355a en la pantalla) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 675 Td (La pantalla ya tiene T\355tulo, Descripci\363n, Servicio, Categor\355a y Evidencia. El campo) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 660 Td (nuevo ir\355a justo debajo de T\355tulo.) Tj ET
+0.94 0.95 0.97 rg 44 495 507 154 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 639 Td (+--------------------------------------+) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 627 Td (|  Nueva solicitud                     |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 615 Td (|                                      |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 603 Td (|  [ T\355tulo                          ] |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 591 Td (|  [ Tel\351fono            ]  <-- aqu\355   |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 579 Td (|  [ Descripcion                     ] |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 567 Td (|  [ Servicio del catalogo      v    ] |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 555 Td (|  [ Categoria                  v    ] |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 543 Td (|  [ Evidencia                  v    ] |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 531 Td (|                                      |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 519 Td (|  [ Enviar solicitud ]                |) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 507 Td (+--------------------------------------+) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 477 Td (Paso 1. La pantalla) Tj ET
+BT /F3 10 Tf 0.15 0.35 0.55 rg 48 460 Td (Archivo: ui/screen/NuevaSolicitudScreen.kt) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 444 Td (Aqu\355 est\341 el cuadro que la persona ve. El t\355tulo ya funciona. El tel\351fono se copia) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 429 Td (al lado, cambiando el nombre.) Tj ET
+0.94 0.95 0.97 rg 44 252 507 166 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 408 Td (SoftField\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 396 Td (    value = form.titulo,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 384 Td (    onValueChange = solicitudViewModel::onTituloChange,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 372 Td (    label = "T\355tulo",) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 360 Td (    error = form.errores.titulo,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 348 Td (    icono = Icons.Outlined.Title) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 336 Td (\)) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 324 Td (SoftField\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 312 Td (    value = form.telefono,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 300 Td (    onValueChange = solicitudViewModel::onTelefonoChange,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 288 Td (    label = "Tel\351fono",) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 276 Td (    icono = Icons.Outlined.Phone) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 264 Td (\)) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 234 Td (Paso 2. Guardar lo que se escribe) Tj ET
+BT /F3 10 Tf 0.15 0.35 0.55 rg 48 217 Td (Archivo: model/SolicitudUiState.kt) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 201 Td (La clase FormularioSolicitud guarda el texto antes de pulsar Enviar. Se agrega una) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 186 Td (l\355nea junto a titulo.) Tj ET
+endstream
+endobj
+9 0 obj<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 10 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> >>endobj
+10 0 obj<< /Length 4076 >>stream
+0.94 0.95 0.97 rg 44 692 507 118 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 800 Td (data class FormularioSolicitud\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 788 Td (    val clienteId: String? = null,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 776 Td (    val titulo: String = "",) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 764 Td (    val telefono: String = "",) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 752 Td (    val descripcion: String = "",) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 740 Td (    val categoria: Categoria? = null,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 728 Td (    val servicio: String = "",) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 716 Td (    val evidencia: String? = null) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 704 Td (\)) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 674 Td (Paso 3. Recibir cada letra) Tj ET
+BT /F3 10 Tf 0.15 0.35 0.55 rg 48 657 Td (Archivo: viewmodel/SolicitudViewModel.kt) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 641 Td (onTituloChange copia el texto al formulario. onTelefonoChange hace lo mismo con el) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 626 Td (campo nuevo. Va justo debajo de onTituloChange.) Tj ET
+0.94 0.95 0.97 rg 44 377 507 238 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 605 Td (fun onTituloChange\(nuevoTitulo: String\) {) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 593 Td (    _estado.update {) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 581 Td (        it.copy\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 569 Td (            formulario = it.formulario.copy\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 557 Td (                titulo = nuevoTitulo) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 545 Td (            \)) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 533 Td (        \)) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 521 Td (    }) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 509 Td (}) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 497 Td () Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 485 Td (fun onTelefonoChange\(nuevoTelefono: String\) {) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 473 Td (    _estado.update {) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 461 Td (        it.copy\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 449 Td (            formulario = it.formulario.copy\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 437 Td (                telefono = nuevoTelefono) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 425 Td (            \)) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 413 Td (        \)) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 401 Td (    }) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 389 Td (}) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 359 Td (Paso 4. Al pulsar Enviar) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 342 Td (En la misma clase, dentro de enviarSolicitud, se arma la solicitud. El tel\351fono se) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 327 Td (agrega en esa lista, junto al t\355tulo.) Tj ET
+0.94 0.95 0.97 rg 44 198 507 118 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 306 Td (val nueva = Solicitud\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 294 Td (    codigo = codigo,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 282 Td (    titulo = form.titulo.trim\(\),) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 270 Td (    telefono = form.telefono.trim\(\),) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 258 Td (    descripcion = form.descripcion.trim\(\),) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 246 Td (    categoria = categoria,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 234 Td (    servicio = form.servicio.trim\(\),) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 222 Td (    estado = EstadoSolicitud.RECIBIDA) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 210 Td (\)) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 180 Td (Paso 5. El dato y la tabla) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 163 Td (Para que el tel\351fono quede guardado hay que declararlo en dos clases.) Tj ET
+BT /F3 10 Tf 0.15 0.35 0.55 rg 48 142 Td (Archivo: model/Solicitud.kt) Tj ET
+0.94 0.95 0.97 rg 44 90 507 46 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 126 Td (val titulo: String,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 114 Td (val telefono: String = "",) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 102 Td (val descripcion: String,) Tj ET
+BT /F3 10 Tf 0.15 0.35 0.55 rg 48 78 Td (Archivo: data/local/Entities.kt, clase SolicitudEntity) Tj ET
+endstream
+endobj
+11 0 obj<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 12 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> >>endobj
+12 0 obj<< /Length 3419 >>stream
+0.94 0.95 0.97 rg 44 764 507 46 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 800 Td (val titulo: String,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 788 Td (val telefono: String,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 776 Td (val descripcion: String,) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 752 Td (Room nota que la tabla cambi\363. La app ya recrea la base cuando el esquema cambia.) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 725 Td (Paso 6. Copiar el campo al guardar y al leer) Tj ET
+BT /F3 10 Tf 0.15 0.35 0.55 rg 48 708 Td (Archivo: data/local/Mappers.kt) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 692 Td (Hay dos copias: de la tabla al dato, y del dato a la tabla. El tel\351fono va en las) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 677 Td (dos.) Tj ET
+0.94 0.95 0.97 rg 44 524 507 142 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 656 Td (fun SolicitudConHistorial.toModel\(\) = Solicitud\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 644 Td (    titulo = solicitud.titulo,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 632 Td (    telefono = solicitud.telefono,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 620 Td (    descripcion = solicitud.descripcion) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 608 Td (\)) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 596 Td () Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 584 Td (fun Solicitud.toEntity\(\) = SolicitudEntity\() Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 572 Td (    titulo = titulo,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 560 Td (    telefono = telefono,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 548 Td (    descripcion = descripcion) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 536 Td (\)) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 506 Td (Si el campo es obligatorio) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 489 Td (El t\355tulo se revisa en enviarSolicitud. Para obligar el tel\351fono se agregan dos) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 474 Td (cosas.) Tj ET
+BT /F3 10 Tf 0.15 0.35 0.55 rg 48 453 Td (En ErroresSolicitud, archivo SolicitudUiState.kt) Tj ET
+0.94 0.95 0.97 rg 44 413 507 34 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 437 Td (val titulo: String? = null,) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 425 Td (val telefono: String? = null,) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 401 Td (En la revision de enviarSolicitud:) Tj ET
+0.94 0.95 0.97 rg 44 356 507 34 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 380 Td (telefono = if \(form.telefono.isBlank\(\)\)) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 368 Td (    "Campo obligatorio" else null) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 344 Td (En el SoftField de la pantalla se muestra el error, igual que el t\355tulo: error =) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 329 Td (form.errores.telefono) Tj ET
+BT /F2 13 Tf 0.05 0.25 0.45 rg 48 302 Td (Orden corto) Tj ET
+0.94 0.95 0.97 rg 44 213 507 82 re f
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 285 Td (1. FormularioSolicitud     agrega telefono) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 273 Td (2. SolicitudViewModel      onTelefonoChange) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 261 Td (3. enviarSolicitud         pasalo al crear Solicitud) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 249 Td (4. Solicitud y Entity      declara el campo) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 237 Td (5. Mappers.kt              copialo en los dos sentidos) Tj ET
+BT /F4 9 Tf 0.1 0.12 0.18 rg 52 225 Td (6. NuevaSolicitudScreen    SoftField debajo de Titulo) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 201 Td (Con eso el campo se ve, se escribe, se valida si hace falta y se guarda en Room) Tj ET
+BT /F1 11 Tf 0 0 0 rg 48 186 Td (junto con la solicitud.) Tj ET
+endstream
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000056 00000 n 
+0000000124 00000 n 
+0000000219 00000 n 
+0000000319 00000 n 
+0000000422 00000 n 
+0000000515 00000 n 
+0000000669 00000 n 
+0000004363 00000 n 
+0000004518 00000 n 
+0000008645 00000 n 
+0000008801 00000 n 
+trailer<< /Size 13 /Root 1 0 R >>
+startxref
+12271
+%%EOF

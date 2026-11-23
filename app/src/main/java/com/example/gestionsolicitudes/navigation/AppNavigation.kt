@@ -1,6 +1,8 @@
 package com.example.gestionsolicitudes.navigation
 
+import android.app.Application
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -30,7 +32,8 @@ fun AppNavigation() {
     val navController = rememberNavController()
     val loginViewModel: LoginViewModel = viewModel()
     val solicitudViewModel: SolicitudViewModel = viewModel()
-    val postViewModel: PostViewModel = viewModel()
+    val aplicacion = LocalContext.current.applicationContext as Application
+    val postViewModel: PostViewModel = viewModel(factory = PostViewModel.fabrica(aplicacion))
 
     NavHost(
         navController = navController,

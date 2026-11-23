@@ -8,7 +8,11 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [UsuarioEntity::class, SolicitudEntity::class, EventoHistorialEntity::class],
+    entities = [
+        UsuarioEntity::class,
+        SolicitudEntity::class,
+        EventoHistorialEntity::class
+    ],
     version = 1,
     exportSchema = false
 )

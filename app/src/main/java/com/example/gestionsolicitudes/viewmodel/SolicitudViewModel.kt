@@ -3,9 +3,13 @@ package com.example.gestionsolicitudes.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gestionsolicitudes.R
 import com.example.gestionsolicitudes.data.local.AppDatabase
+import com.example.gestionsolicitudes.data.remote.RetrofitInstance
 import com.example.gestionsolicitudes.data.repository.SolicitudRepository
 import com.example.gestionsolicitudes.model.Categoria
+import com.example.gestionsolicitudes.model.ServicioCatalogo
+import com.example.gestionsolicitudes.repository.ServicioRepository
 import com.example.gestionsolicitudes.model.ErroresSolicitud
 import com.example.gestionsolicitudes.model.EstadoSolicitud
 import com.example.gestionsolicitudes.model.EventoHistorial
@@ -27,6 +31,11 @@ class SolicitudViewModel(app: Application) : AndroidViewModel(app) {
 
     private val db = AppDatabase.getDatabase(app)
     private val repositorio = SolicitudRepository(db.solicitudDao(), db.usuarioDao())
+    private val catalogoRemoto = ServicioRepository(
+        projectId = app.getString(R.string.project_id),
+        apiKey = app.getString(R.string.google_api_key),
+        api = RetrofitInstance.crear(app)
+    )
 
     private val _estado = MutableStateFlow(SolicitudUiState())
     val estado: StateFlow<SolicitudUiState> = _estado.asStateFlow()
@@ -43,6 +52,16 @@ class SolicitudViewModel(app: Application) : AndroidViewModel(app) {
         }
         viewModelScope.launch {
             _estado.update { it.copy(clientes = repositorio.clientes()) }
+        }
+        viewModelScope.launch {
+            try {
+                val lista = catalogoRemoto.obtenerCatalogo()
+                _estado.update { it.copy(catalogo = lista, errorCatalogo = null) }
+            } catch (e: Exception) {
+                _estado.update {
+                    it.copy(errorCatalogo = "No se pudo leer el catálogo: ${e.localizedMessage}")
+                }
+            }
         }
     }
 
@@ -92,6 +111,23 @@ class SolicitudViewModel(app: Application) : AndroidViewModel(app) {
 
     fun onServicioChange(nuevoServicio: String) {
         _estado.update { it.copy(formulario = it.formulario.copy(servicio = nuevoServicio)) }
+    }
+
+    fun onServicioCatalogo(servicio: ServicioCatalogo) {
+        val categoria = Categoria.entries.find {
+            it.etiqueta.equals(servicio.servicio, ignoreCase = true)
+        }
+        _estado.update {
+            it.copy(
+                formulario = it.formulario.copy(
+                    servicio = servicio.servicio,
+                    categoria = categoria ?: it.formulario.categoria,
+                    errores = it.formulario.errores.copy(
+                        categoria = if (categoria != null) null else it.formulario.errores.categoria
+                    )
+                )
+            )
+        }
     }
 
     fun onEvidenciaChange(nuevaEvidencia: String?) {

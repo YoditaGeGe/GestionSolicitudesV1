@@ -39,6 +39,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.gestionsolicitudes.model.ServicioCatalogo
 import com.example.gestionsolicitudes.ui.components.PrettyCard
 import com.example.gestionsolicitudes.ui.components.SoftChip
 import com.example.gestionsolicitudes.ui.theme.Abyss
@@ -54,6 +55,7 @@ fun PostScreen(
     onIrAGestion: (() -> Unit)? = null
 ) {
     val posts = viewModel.postList.collectAsState().value
+    val servicios = viewModel.servicios.collectAsState().value
     val mensaje = viewModel.mensaje.collectAsState().value
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -70,9 +72,9 @@ fun PostScreen(
             TopAppBar(
                 title = {
                     Column {
-                        Text("Posts desde la API", fontWeight = FontWeight.SemiBold)
+                        Text("Posts en Firebase", fontWeight = FontWeight.SemiBold)
                         Text(
-                            "JSONPlaceholder · Guía 14",
+                            "Retrofit · tu Firestore",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -114,7 +116,7 @@ fun PostScreen(
                 ) {
                     Icon(Icons.Outlined.CloudDownload, contentDescription = null, modifier = Modifier.size(18.dp))
                     Spacer(Modifier.width(6.dp))
-                    Text("GET")
+                    Text("GET todos")
                 }
                 Button(
                     onClick = { viewModel.crearPostDemo() },
@@ -129,22 +131,54 @@ fun PostScreen(
                     Text("POST")
                 }
             }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedButton(
+                    onClick = { viewModel.fetchPostsDeUsuario(1) },
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.height(44.dp)
+                ) {
+                    Text("GET usuario 1")
+                }
+                OutlinedButton(
+                    onClick = { viewModel.fetchPostPorId(1) },
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.height(44.dp)
+                ) {
+                    Text("GET id 1")
+                }
+            }
+            OutlinedButton(
+                onClick = { viewModel.crearServicioDemo() },
+                shape = RoundedCornerShape(14.dp),
+                modifier = Modifier.fillMaxWidth().height(44.dp)
+            ) {
+                Icon(Icons.Outlined.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+                Spacer(Modifier.width(6.dp))
+                Text("POST servicio")
+            }
 
-            if (posts.isEmpty()) {
+            if (posts.isEmpty() && servicios.isEmpty()) {
                 PrettyCard {
-                    Text("Cargando posts...", fontWeight = FontWeight.Medium)
+                    Text("Firebase no devolvió documentos", fontWeight = FontWeight.Medium)
                     Text(
-                        "En un momento aparecen los datos de la API.",
+                        "Si borraste todo, pulsa GET todos y Firebase vuelve a crear los tres servicios.",
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                items(posts) { post ->
+                items(servicios, key = { "servicio-${it.id}" }) { servicio ->
+                    TarjetaServicio(
+                        servicio = servicio,
+                        alEditar = { viewModel.actualizarServicio(servicio) },
+                        alEliminar = { viewModel.eliminarServicio(servicio) }
+                    )
+                }
+                items(posts, key = { "post-${it.id}" }) { post ->
                     PrettyCard {
                         SoftChip("Usuario ${post.userId}", Abyss)
                         Text(
@@ -179,6 +213,47 @@ fun PostScreen(
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TarjetaServicio(
+    servicio: ServicioCatalogo,
+    alEditar: () -> Unit,
+    alEliminar: () -> Unit
+) {
+    PrettyCard {
+        SoftChip("Servicio ${servicio.id}", Abyss)
+        Text(
+            text = servicio.servicio,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold
+        )
+        Text(
+            text = "${servicio.categoria}: ${servicio.descripcion}",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(
+                onClick = alEditar,
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Icon(Icons.Outlined.Edit, contentDescription = null, modifier = Modifier.size(18.dp))
+                Spacer(Modifier.width(6.dp))
+                Text("PUT")
+            }
+            TextButton(onClick = alEliminar) {
+                Icon(
+                    Icons.Outlined.Delete,
+                    contentDescription = null,
+                    tint = Pulse,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(Modifier.width(4.dp))
+                Text("DELETE", color = Pulse)
             }
         }
     }

@@ -1,36 +1,29 @@
 package com.example.gestionsolicitudes.repository
 
 import com.example.gestionsolicitudes.data.model.Post
-import com.example.gestionsolicitudes.data.remote.ApiService
+import com.example.gestionsolicitudes.data.remote.FirestoreDocumento
+import com.example.gestionsolicitudes.data.remote.FirestoreLista
+import com.example.gestionsolicitudes.data.remote.FirestoreValor
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldContainExactly
-import io.mockk.coEvery
-import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
 
-class TestablePostRepository(private val testApi: ApiService) : PostRepository() {
-    override suspend fun getPosts(): List<Post> {
-        return testApi.getPosts()
-    }
-}
-
-@OptIn(ExperimentalCoroutinesApi::class)
 class PostRepositoryTest : StringSpec({
-    "getPosts() debe retornar una lista de posts simulada" {
-        val fakePosts = listOf(
-            Post(userId = 1, id = 1, title = "Titulo 1", body = "Cuerpo 1"),
-            Post(userId = 2, id = 2, title = "Titulo 2", body = "Cuerpo 2")
+    "aPosts convierte el GET de Firestore" {
+        val respuesta = FirestoreLista(
+            documents = listOf(
+                FirestoreDocumento(
+                    fields = mapOf(
+                        "userId" to FirestoreValor(integerValue = "1"),
+                        "id" to FirestoreValor(integerValue = "1"),
+                        "title" to FirestoreValor(stringValue = "Landing de la pyme"),
+                        "body" to FirestoreValor(stringValue = "Ajustar el formulario")
+                    )
+                )
+            )
         )
 
-        val mockApi = mockk<ApiService>()
-        coEvery { mockApi.getPosts() } returns fakePosts
-
-        val repo = TestablePostRepository(testApi = mockApi)
-
-        runTest {
-            val resultado = repo.getPosts()
-            resultado shouldContainExactly fakePosts
-        }
+        PostRepository.aPosts(respuesta) shouldContainExactly listOf(
+            Post(userId = 1, id = 1, title = "Landing de la pyme", body = "Ajustar el formulario")
+        )
     }
 })

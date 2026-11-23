@@ -24,4 +24,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "GestionSolicitudes"
 include(":app")
-include(":app")

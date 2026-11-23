@@ -31,6 +31,8 @@ data class SolicitudUiState(
     val nota: String = "",
     val errorNota: String? = null,
     val clientes: List<Usuario> = emptyList(),
+    val catalogo: List<ServicioCatalogo> = emptyList(),
+    val errorCatalogo: String? = null,
     val guardando: Boolean = false,
     val esperandoDetalle: Boolean = false
 ) {

@@ -1,29 +1,56 @@
 package com.example.gestionsolicitudes.data.remote
 
-import com.example.gestionsolicitudes.data.model.Post
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.Url
 
-// Esta interfaz define los endpoints HTTP
+// Catálogo externo del diagrama: GET a la colección servicios de tu Firestore.
 interface ApiService {
 
-    // Define una solicitud GET al endpoint /posts
-    @GET("/posts")
-    suspend fun getPosts(): List<Post>
+    @GET("projects/{projectId}/databases/(default)/documents/posts")
+    suspend fun listarPosts(
+        @Path("projectId") projectId: String,
+        @Query("key") key: String,
+        @Query("pageSize") pageSize: Int = 50
+    ): FirestoreLista
 
-    // Crea un nuevo post (JSONPlaceholder simula la creación)
-    @POST("/posts")
-    suspend fun createPost(@Body post: Post): Post
+    @GET("projects/{projectId}/databases/(default)/documents/servicios")
+    suspend fun listarServicios(
+        @Path("projectId") projectId: String,
+        @Query("key") key: String,
+        @Query("pageSize") pageSize: Int = 50
+    ): FirestoreLista
 
-    // Actualiza un post existente
-    @PUT("/posts/{id}")
-    suspend fun updatePost(@Path("id") id: Int, @Body post: Post): Post
+    @POST("projects/{projectId}/databases/(default)/documents/posts")
+    suspend fun crearPost(
+        @Path("projectId") projectId: String,
+        @Query("key") key: String,
+        @Body documento: FirestoreNuevoDocumento
+    ): FirestoreDocumento
 
-    // Elimina un post
-    @DELETE("/posts/{id}")
-    suspend fun deletePost(@Path("id") id: Int)
+    @PATCH
+    suspend fun actualizarDocumento(
+        @Url url: String,
+        @Query("key") key: String,
+        @Query("updateMask.fieldPaths") campos: List<String>,
+        @Body documento: FirestoreNuevoDocumento
+    ): FirestoreDocumento
+
+    @DELETE
+    suspend fun borrarDocumento(
+        @Url nombre: String,
+        @Query("key") key: String
+    )
+
+    @POST("projects/{projectId}/databases/(default)/documents/servicios")
+    suspend fun crearServicio(
+        @Path("projectId") projectId: String,
+        @Query("key") key: String,
+        @Body documento: FirestoreNuevoDocumento
+    ): FirestoreDocumento
 }

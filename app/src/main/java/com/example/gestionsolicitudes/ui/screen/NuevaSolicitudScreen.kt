@@ -94,12 +94,27 @@ fun NuevaSolicitudScreen(
                     minLines = 3,
                     icono = Icons.Outlined.Notes
                 )
-                SoftField(
-                    value = form.servicio,
-                    onValueChange = solicitudViewModel::onServicioChange,
-                    label = "Servicio o sitio web (opcional)",
-                    icono = Icons.Outlined.Language
+                val elegido = estado.catalogo.find { it.servicio == form.servicio }
+                MenuDesplegable(
+                    etiqueta = "Servicio del catálogo",
+                    valor = form.servicio.ifBlank { "Selecciona un servicio" },
+                    opciones = estado.catalogo.map { it.servicio },
+                    icono = Icons.Outlined.Language,
+                    alElegir = { nombre ->
+                        estado.catalogo.find { it.servicio == nombre }?.let(
+                            solicitudViewModel::onServicioCatalogo
+                        )
+                    }
                 )
+                elegido?.let {
+                    Text(
+                        text = "${it.categoria}: ${it.descripcion}",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                estado.errorCatalogo?.let {
+                    Text(text = it, color = MaterialTheme.colorScheme.error)
+                }
             }
         }
 
