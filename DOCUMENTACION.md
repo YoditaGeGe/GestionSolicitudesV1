@@ -23,9 +23,8 @@ Jetpack Compose, MVVM, Room y Retrofit.
 - La pantalla llama al ViewModel.
 - `SolicitudViewModel` guarda las solicitudes en Room.
 - `PostViewModel` habla con Firestore por Retrofit.
-- Las solicitudes no se guardan en Firebase. El catálogo externo sí.
-
-No hay un microservicio Spring Boot. La persistencia de solicitudes es Room y el catálogo externo es la API REST de Firestore.
+- Las solicitudes se guardan en Room.
+- El catálogo externo se lee con Retrofit desde Firestore.
 
 ## Room
 
@@ -80,3 +79,28 @@ La firma de release está en `keystore/gestion-solicitudes-release.jks`, alias `
 El APK queda en `app/build/outputs/apk/release/app-release.apk`.
 
 Ese comando no cambia el APK de depuración que instala Android Studio con Run.
+
+## Defensa
+
+Quince minutos, sin microservicios. El cambio en vivo es agregar un campo al formulario de crear solicitud. El ejemplo de la guía es Teléfono. Hoy ese campo no existe: lo agregas delante del docente.
+
+Orden para mostrarlo:
+
+1. Abre la app en el emulador e inicia sesión con `cliente@demo.cl` / `123456`.
+2. Explica MVVM: `ui/screen` pinta, `viewmodel` decide y `data/local` guarda en Room.
+3. Entra como admin a **Posts en Firebase** y pulsa **GET todos**. Eso es Retrofit contra Firestore, la API externa. `ApiService` está en `data/remote`.
+4. Crea una solicitud. Eso inserta en Room, en `solicitudes` y `eventos_historial`.
+5. Corre `./gradlew :app:testDebugUnitTest` y explica `SolicitudTest` o `ServicioRepositoryTest`.
+6. Muestra `app/build/outputs/apk/release/app-release.apk` y el alias `gestion`.
+7. Muestra el repositorio privado y los commits de `main`.
+
+Para el campo nuevo, en este orden:
+
+1. `FormularioSolicitud` en `model/SolicitudUiState.kt`: el dato y, si es obligatorio, el error.
+2. `NuevaSolicitudScreen.kt`: el campo en el formulario.
+3. `SolicitudViewModel`: guardar lo escrito y copiarlo al crear.
+4. `Solicitud` y `SolicitudEntity`: la columna.
+5. `Mappers.kt`: ida y vuelta entre el modelo y Room.
+6. El detalle, en `UiBits.kt`, para que el dato se vea después de crearla.
+
+Al cambiar `SolicitudEntity`, Room borra la base local y vuelve a crear los usuarios de prueba. Vuelve a iniciar sesión y crea una solicitud con el campo nuevo.
