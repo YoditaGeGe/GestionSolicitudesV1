@@ -1,15 +1,7 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.google.services)
-}
-
-val firmaRelease = Properties().apply {
-    val archivo = rootProject.file("local.properties")
-    if (archivo.exists()) archivo.inputStream().use { load(it) }
 }
 
 android {
@@ -28,18 +20,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        create("release") {
-            storeFile = rootProject.file(firmaRelease.getProperty("RELEASE_STORE_FILE"))
-            storePassword = firmaRelease.getProperty("RELEASE_STORE_PASSWORD")
-            keyAlias = firmaRelease.getProperty("RELEASE_KEY_ALIAS")
-            keyPassword = firmaRelease.getProperty("RELEASE_KEY_PASSWORD")
-        }
-    }
-
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
             optimization {
                 enable = true
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
@@ -105,9 +88,18 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("androidx.test.espresso:espresso-core:3.6.1")
+        force("androidx.test:runner:1.6.2")
+        force("androidx.test.ext:junit:1.2.1")
+    }
 }
 
 // Obligatorio para usar JUnit 5

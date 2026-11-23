@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GestionSolicitudes</string>
+    <string name="project_id">gestion-solicitudes-demo</string>
+    <string name="google_api_key"></string>
 </resources>
